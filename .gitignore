@@ -1,0 +1,5 @@
+# cached images
+images/
+
+.idea/
+__pycache__/
