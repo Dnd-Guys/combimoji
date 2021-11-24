@@ -30,6 +30,17 @@ def list_emojis(text: str) -> list[str]:
     return emoji_list
 
 
+def log_emojis(emojis):
+    with open("data/emojis.txt", "r") as f:
+        logged_emojis = set(f.read())
+    with open("data/emojis.txt", "a") as f:
+        for emoji in emojis:
+            if emoji not in logged_emojis:
+                f.write(emoji)
+                logged_emojis.add(emoji)
+
+
+
 def start_message(update, context):
     update.message.reply_text('Hi! I combine emojis. Try /help to learn more.')
 
@@ -74,6 +85,8 @@ def search_emojis(update, context):
     if len(emojis) >= 2:
         update.message.reply_text("Detected 2 emojis, downloading image...")
         if img_title := emoji_download.download_emoji_combo(emojis[:2]):
+            log_emojis(emojis[:2])
+
             update.message.reply_text("Image exists!")
             update.message.reply_photo(open(img_title, 'rb'))
             update.message.reply_text("And here's the png source:")
