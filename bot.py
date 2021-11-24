@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import logging
 import os
@@ -20,7 +20,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 
-def split_count(text):
+def list_emojis(text: str) -> list[str]:
     emoji_list = []
     data = regex.findall(r'\X', text)
     for word in data:
@@ -60,20 +60,17 @@ Backend:
 """)
 
 
-def echo(update, context):
+def search_emojis(update, context):
     user = update.message.from_user
     name = user['first_name']
     if user['last_name']:
         name = ' '.join([name, user['last_name']])
 
-    if name == "Bohdan Kostiv":  # :)
-        update.message.reply_text("ну бодя.....")
-
     print(f"{name} at @{user['username']} is using me ...")
     print(update.message.text)
     print("-----------------------")
 
-    emojis = split_count(update.message.text)
+    emojis = list_emojis(update.message.text)
     if len(emojis) >= 2:
         update.message.reply_text("Detected 2 emojis, downloading image...")
         if img_title := emoji_download.download_emoji_combo(emojis[:2]):
@@ -100,7 +97,7 @@ def main():
     dp.add_handler(CommandHandler("start", start_message))
     dp.add_handler(CommandHandler("help", help_message))
     dp.add_handler(CommandHandler("plan", plan_message))
-    dp.add_handler(MessageHandler(Filters.text, echo))
+    dp.add_handler(MessageHandler(Filters.text, search_emojis))
 
     dp.add_error_handler(error)
 
