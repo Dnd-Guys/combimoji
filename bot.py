@@ -12,7 +12,6 @@ import emoji_download
 # Telegram API secret token
 TOKEN = os.getenv('COMBIMOJI_TOKEN')
 
-
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -119,4 +118,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        os.mkdir("./images")
+        print(f"Directory 'images' has been created")
+    finally:
+        main()
