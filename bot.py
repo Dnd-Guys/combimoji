@@ -30,9 +30,9 @@ def list_emojis(text: str) -> list[str]:
 
 
 def log_emojis(emojis):
-    with open("data/emojis.txt", "r") as f:
+    with open("data/emojis.txt", "r", encoding="utf-8") as f:
         logged_emojis = set(f.read())
-    with open("data/emojis.txt", "a") as f:
+    with open("data/emojis.txt", "a", encoding="utf-8") as f:
         for emoji in emojis:
             if emoji not in logged_emojis:
                 f.write(emoji)
