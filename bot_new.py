@@ -15,9 +15,7 @@ logger = logging.getLogger(__name__)
 
 BOT_TOKEN = os.getenv('COMBIMOJI_TOKEN')
 IMGBB_TOKEN = os.getenv('IMGBB_API_KEY')
-IMGBB_TOKEN = "18a0ada629bb42ca3eef86c750565531"
-BOT_TOKEN = "2143994031:AAFEjbSgUD54wbOKnT1zqDFscarm4HrLydQ" # real_bot
-BOT_TOKEN = "2110978717:AAEhc-Y7543erLMYHpPg2RTYjWOmK1HejEc" # test_bot
+
 bot = telebot.TeleBot(BOT_TOKEN)
 
 
